@@ -1,0 +1,51 @@
+# Local .terraform directories
+**/.terraform/*
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Crash logs
+crash.log
+
+# Sensitive variable files
+*.tfvars
+*.tfvars.json
+
+# Override filess
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Include override files you do wish to add to version control using negated pattern
+# !example_override.tf
+
+# Terraform plan output
+*tfplan*
+
+# Terraform CLI config files
+.terraformrc
+terraform.rc
+
+# Terraform lock file
+.terraform.lock.hcl
+
+# Terragrunt cache
+.terragrunt-cache
+
+# Temporary or testing directories
+testing/
+*.tmp
+*.bak
+*.backup
+
+# Executables / binaries
+*.exe
+*.zip
+*.tar.gz
+*.tgz
+
+# OS generated files
+.DS_Store
+Thumbs.db
