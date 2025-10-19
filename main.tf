@@ -28,32 +28,33 @@ resource "aws_instance" "main" {
     }
   )
 }
-
 resource "terraform_data" "main" {
   triggers_replace = [
     aws_instance.main.id
   ]
-  
-  provisioner "file" {
-  source      = "bootstrap.sh"
-  destination = "/tmp/bootstrap.sh"
-  }
 
   connection {
     type     = "ssh"
     user     = "ec2-user"
     password = "DevOps321"
     host     = aws_instance.main.private_ip
+    timeout  = "5m"
+  }
+  
+  provisioner "file" {
+    source      = "bootstrap.sh"
+    destination = "/tmp/bootstrap.sh"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/${var.component}.sh",
-      "sudo sh /tmp/${var.component}.sh ${var.component} ${var.environment}"
+      "chmod +x /tmp/bootstrap.sh",
+      "sudo sh /tmp/bootstrap.sh ${var.component} ${var.environment}"
     ]
   }
-}
 
+  depends_on = [aws_instance.main]
+}
 resource "aws_ec2_instance_state" "main" {
   instance_id = aws_instance.main.id
   state       = "stopped"
